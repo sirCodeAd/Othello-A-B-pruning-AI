@@ -1,0 +1,13 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/Users/adam/Downloads/javafx-sdk-21.0.1/lib/javafx-swt.jar",
+        "/Users/adam/Downloads/javafx-sdk-21.0.1/lib/javafx.base.jar",
+        "/Users/adam/Downloads/javafx-sdk-21.0.1/lib/javafx.controls.jar",
+        "/Users/adam/Downloads/javafx-sdk-21.0.1/lib/javafx.fxml.jar",
+        "/Users/adam/Downloads/javafx-sdk-21.0.1/lib/javafx.graphics.jar",
+        "/Users/adam/Downloads/javafx-sdk-21.0.1/lib/javafx.media.jar",
+        "/Users/adam/Downloads/javafx-sdk-21.0.1/lib/javafx.swing.jar",
+        "/Users/adam/Downloads/javafx-sdk-21.0.1/lib/javafx.web.jar"
+    ]
+}
