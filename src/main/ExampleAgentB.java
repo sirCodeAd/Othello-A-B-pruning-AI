@@ -52,10 +52,10 @@ public class ExampleAgentB extends Agent{
 		int waitTime = UserSettings.MIN_SEARCH_TIME;
 		
 		ThreadManager.pause(TimeSpan.millis(waitTime)); // Pauses execution for the wait time to cause delay
-		
-		return AgentController.findBestMove(gameState, playerTurn); // returns an example AI move Note: this is not AB Pruning
-	}
+
+        return AgentController.findBestMove(gameState, playerTurn); // returns an example AI move Note: this is not AB Pruning
+
+    }
 
 }
-
-
+		

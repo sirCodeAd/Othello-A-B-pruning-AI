@@ -109,7 +109,7 @@ public class UserSettings {
 	/*
 	 * 
 	 */
-	public static final int MAX_SEARCH_DEPTH = 8;
+	//public static final int MAX_SEARCH_DEPTH = 3;
 	
 	/**
 	 * Weight from high to low. The higher the 

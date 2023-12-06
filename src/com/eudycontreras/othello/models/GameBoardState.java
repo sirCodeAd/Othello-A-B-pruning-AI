@@ -1,12 +1,16 @@
 package com.eudycontreras.othello.models;
 
+import static main.UserSettings.BOARD_GRID_SIZE;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 import com.eudycontreras.othello.capsules.MoveWrapper;
 import com.eudycontreras.othello.capsules.ObjectiveWrapper;
+import com.eudycontreras.othello.controllers.AgentController;
 import com.eudycontreras.othello.enumerations.BoardCellState;
+import com.eudycontreras.othello.enumerations.PlayerTurn;
 import com.eudycontreras.othello.utilities.GameBoardUtility;
 import com.eudycontreras.othello.utilities.GameTreeUtility;
 
@@ -135,11 +139,66 @@ public class GameBoardState {
 	 * @return
 	 */
 	public List<GameBoardState> getChildStates() {
+		List<GameBoardState> childStates = new ArrayList<>();
+	
+		// Hardcoding two game board states for demonstration
+		GameBoardCell[][] cells1 = new GameBoardCell[BOARD_GRID_SIZE][BOARD_GRID_SIZE];
+		GameBoardCell[][] cells2 = new GameBoardCell[BOARD_GRID_SIZE][BOARD_GRID_SIZE];
+	
+		// Initialize these arrays to represent specific game states
+		initializeCells(cells1); // Set up cells1 with a specific configuration
+		initializeCells(cells2); // Set up cells2 with a different configuration
+	
+		// Create GameBoard instances with these cell arrays
+		GameBoard gameBoard1 = new GameBoard(cells1);
+		GameBoard gameBoard2 = new GameBoard(cells2);
+	
+		// Create GameBoardState instances with these GameBoard objects
+		GameBoardState state1 = new GameBoardState(gameBoard1);
+		GameBoardState state2 = new GameBoardState(gameBoard2);
+	
+		// Add these states to the list
+		childStates.add(state1);
+		childStates.add(state2);
+	
 		return childStates;
+	}
+	
+	private void initializeCells(GameBoardCell[][] cells) {
+		for (int row = 0; row < cells.length; row++) {
+			for (int col = 0; col < cells[row].length; col++) {
+				cells[row][col] = new GameBoardCell(gameBoard, row, col, BoardCellState.EMPTY);
+
+            	// Example: Setting up an initial game state
+            	if ((row == 3 && col == 3) || (row == 4 && col == 4)) {
+               	 	cells[row][col].setCellState(BoardCellState.WHITE);
+            	} else if ((row == 3 && col == 4) || (row == 4 && col == 3)) {
+                	cells[row][col].setCellState(BoardCellState.BLACK);
+           		}
+			}
+		}
 	}
 	
 	public List<GameBoardState> getChildStates(BoardCellState state){
 		//return childStates.stream().filter(s-> s.getPlayerTurn() == state).collect(Collectors.toList());
+		List<GameBoardState> childStates = new ArrayList<>();
+		return childStates;
+	}
+
+	public List<GameBoardState> generateChildStates(GameBoardState gameBoardState, PlayerTurn playerTurn){
+		//return childStates.stream().filter(s-> s.getPlayerTurn() == state).collect(Collectors.toList());
+		List<GameBoardState> childStates = new ArrayList<>();
+		List<ObjectiveWrapper> possibleMoves = AgentController.getAvailableMoves(gameBoardState, null);// Implement this method
+
+		if (playerTurn == null) {
+			return new ArrayList<>();
+		}
+
+    	for (ObjectiveWrapper move : possibleMoves) {
+        // Create a new state based on applying this move
+        GameBoardState newState = AgentController.getNewState(gameBoardState, move); // Implement this method
+        childStates.add(newState);
+    }
 		return childStates;
 	}
 	
